@@ -24,7 +24,9 @@ pipeline {
             }
         }
         stage('Image Scanner'){
+            steps{
             sh 'trivy docker image medhasritha/adservice:latest'
+            }
         }
         
         stage('Push Docker Image') {
