@@ -1,12 +1,12 @@
 pipeline {
     agent any
     tools{
-        maven 'mygradle'
+        gradle 'mygradle'
     }
     stages {
         stage('Build'){
             steps{
-                sh 'gradle clean package'
+                sh 'gradle clean build'
             }
         }
         stage("CQA"){
