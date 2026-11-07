@@ -1,8 +1,14 @@
 pipeline {
     agent any
-    
-
+    tools{
+        maven 'mymaven'
+    }
     stages {
+        stage('Build'){
+            steps{
+                sh 'mvn clean package'
+            }
+        }
         stage("CQA"){
             steps{
                 script{
