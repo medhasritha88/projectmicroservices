@@ -7,7 +7,7 @@ pipeline {
                 script{
                 def scannerHome = tool 'mysonar';
                 withSonarQubeEnv('mysonar') {
-                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=myproject -Dsonar.project -Dsonar.sources=cartservice"
+                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=myproject -Dsonar.project -Dsonar.sources=src/"
                 }
             }
         }
