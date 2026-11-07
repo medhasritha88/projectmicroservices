@@ -7,7 +7,7 @@ pipeline {
                 script{
                 def scannerHome = tool 'mysonar';
                 withSonarQubeEnv('mysonar') {
-                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=myproject -Dsonar.project -Dsonar.sources=src/"
+                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=myproject  -Dsonar.sources=src/"
                 }
             }
         }
@@ -24,7 +24,11 @@ pipeline {
                 }
             }
         }
-        
+        stage('Image scanner'){
+         steps{
+             sh 'trivy image medhasritha/cartservice:latest'
+         }
+        }
         stage('Push Docker Image') {
             steps {
                 script {
