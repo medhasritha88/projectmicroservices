@@ -1,7 +1,19 @@
 pipeline {
     agent any
+    
 
     stages {
+        stage("CQA"){
+            steps{
+                script{
+                def scannerHome = tool 'mysonar';
+                withSonarQubeEnv('mysonar') {
+                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=myproject"
+                }
+            }
+        }
+    }
+
         stage('Build & Tag Docker Image') {
             steps {
                 script {
@@ -10,6 +22,9 @@ pipeline {
                     }
                 }
             }
+        }
+        stage('Image Scanner'){
+            sh 'trivy docker image medhasritha/adservice:latest'
         }
         
         stage('Push Docker Image') {
